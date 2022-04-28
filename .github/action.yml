@@ -18,25 +18,28 @@ deploy:
       uses: https://github.com/Iberia-Ent/software-engineering--reference-architecture--workflow/blob/main/.github/action/action.yml
       ref: main
       with:
-        project-name:                                     # Product global name example: 'bestpratices' - require true, use in dns name
-        lenguage-code:                                    # lenguage programming code for example: java or angular - require true  
-        testIntegration:                                  # run integration test, soap request or rest  default: false
-        testIntegration-path:                             # test xml integration path default: '${{ github.workspace }}'
-        scancode:                                         # control scan code default: false
-        sonarqube-host: ${{secret.sonar-url}}             # host control quality code with sonar - optional
-        sonarqube-user: ${{secret.sonar-user}}            # user control quality code with sonar - optional
-        sonarqube-token: ${{secret.sonar-token}}          # pwd control quality code with sonar - optional
-        sonarqube-client-version:                         # client sonar-scanner use. see https://binaries.sonarsource.com/?prefix=Distribution/sonar-scanner-cli/
-        codeartifact-allow:                               # active true repositorio codeartifact - required: true - default: false (nexus adopt)
-        repository-DNS:  ${{secret.nexus-url}}            # host registry artifact - 
-                                                          # if codeArtifact allow then dns is example: my_domain-111122223333.d.codeartifact.us-west-2.amazonaws.com
-        repository-user: ${{secret.nexus-user}}           # user registry artifact - if codeArtifact allow then user is owner aws id.
-        repository-token: ${{secret.nexus-pass}}          # pass registry artifact - if codeArtifact allow then token is auto generate. input is empty
-        aws-environment-name:                             # Environment name for default: 'production'
-        aws-environment-prefix:                           # Environment prefix name for default: 'pro'
-        aws-access-key:                                   # access key aws publish environment ( example: Integration, preproduction, quality)
-        aws-secret-acesss-key:                            # secret access key aws publish environment ( example: Integration, preproduction, quality)
-        aws-environment-dev-name:                         # Development environment name for default: 'development'
-        aws-environment-dev-prefix:                       # Development environment prefix name for default: 'dev'
-        aws-access-key-dev:                               # access key aws development environment
-        aws-secret-acesss-key-dev:                        # secret access key aws development environment
+        project-name: "bestpratice"                                     # Product global name example: 'bestpratices' - require true, use in dns name
+        lenguage-code: "java"                                           # lenguage programming code for example: java or angular - require true  
+        ##### optional
+        # testIntegration:                                              # run integration test, soap request or rest  default: false
+        # testIntegration-path:                                         # test xml integration path default: '${{ github.workspace }}'
+        ####
+        scancode: false                                                 # control scan code default: false
+        # sonarqube-host: ${{secret.sonar-url}}                         # host control quality code with sonar - optional
+        # sonarqube-user: ${{secret.sonar-user}}                        # user control quality code with sonar - optional
+        # sonarqube-token: ${{secret.sonar-token}}                      # pwd control quality code with sonar - optional
+        # sonarqube-client-version:                                     # client sonar-scanner use. see https://binaries.sonarsource.com/?prefix=Distribution/sonar-scanner-cli/
+        #### configure to bestpractice account
+        # use codeartifact for example
+        codeartifact-allow: true                                        # active true repositorio codeartifact - required: true - default: false (nexus adopt)
+        repository-DNS:  ${{secret.nexus-url}}                          # host registry artifact - if codeArtifact allow then dns is example: my_domain-111122223333.d.codeartifact.us-west-2.amazonaws.com
+        repository-user: ${{secret.nexus-user}}                         # user registry artifact - if codeArtifact allow then user is owner aws id.
+        repository-token: ${{secret.nexus-pass}}                        # pass registry artifact - if codeArtifact allow then token is auto generate. input is empty
+        aws-environment-name: "production"                              # Environment name for default: 'production'
+        aws-environment-prefix: "pro"                                   # Environment prefix name for default: 'pro'
+        aws-access-key: ${{secret.aws-access-key}}                      # access key aws publish environment ( example: Integration, preproduction, quality)
+        aws-secret-acesss-key: ${{secret.aws-secret-access-key}}        # secret access key aws publish environment ( example: Integration, preproduction, quality)
+        aws-environment-dev-name: "development"                         # Development environment name for default: 'development'
+        aws-environment-dev-prefix: "dev"                               # Development environment prefix name for default: 'dev'
+        aws-access-key-dev: ${{secret.aws-access-key}}                  # access key aws development environment
+        aws-secret-acesss-key-dev: ${{secret.aws-secret-access-key}}    # secret access key aws development environment
