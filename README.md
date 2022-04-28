@@ -39,9 +39,12 @@ The project contains a file called pom.xml, it is important that this file conta
 <groupId>com.aig.swe</groupId>
 <artifactId>demo</artifactId>
 <version>1.0.0-SNAPSHOT</version>
+<packaging>jar</packaging>
 ....
 ````
 This repository implements the github action in the path .github/action.yml. the action implements the workflow of the [reference architecture](https://github.com/Iberia-Ent/software-engineering--reference-architecture--workflow/blob/main/README.md). the configuration can be consulted in [developers.rm](https://github.com/Iberia-Ent/software-engineering--reference-architecture--workflow/blob/main/DEVELOPERS.md).
+
+For the workflow to work, there must be a repository of derivatives, this repository can be nexus or codeartifact depending on how it is configured.
 
 Contributing
 ---
