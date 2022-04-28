@@ -41,6 +41,8 @@ The project contains a file called pom.xml, it is important that this file conta
 <version>1.0.0-SNAPSHOT</version>
 ....
 ````
+This repository implements the github action in the path .github/action.yml. the action implements the workflow of the [reference architecture](https://github.com/Iberia-Ent/software-engineering--reference-architecture--workflow/blob/main/README.md). the configuration can be consulted in [developers.rm](https://github.com/Iberia-Ent/software-engineering--reference-architecture--workflow/blob/main/DEVELOPERS.md).
+
 Contributing
 ---
 Maintainers
