@@ -36,9 +36,9 @@ Getting started
 The project contains a file called pom.xml, it is important that this file contains the version and the domain and the name of the package being developed, in our example it is **com.iag.swe.demo** with version **1.0.0-SNAPSHOT**. when the software deploys to publish environment the final version and the repository tag will be 1.0.0 version.
 ````
 ....
- <groupId>com.aig.swe</groupId>
-	<artifactId>demo</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+<groupId>com.aig.swe</groupId>
+<artifactId>demo</artifactId>
+<version>1.0.0-SNAPSHOT</version>
 ....
 ````
 
