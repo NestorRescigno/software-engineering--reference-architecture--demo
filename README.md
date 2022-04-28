@@ -45,6 +45,11 @@ The project contains a file called pom.xml, it is important that this file conta
 This repository implements the github action in the path .github/action.yml. the action implements the workflow of the [reference architecture](https://github.com/Iberia-Ent/software-engineering--reference-architecture--workflow/blob/main/README.md). the configuration can be consulted in [developers.md](https://github.com/Iberia-Ent/software-engineering--reference-architecture--workflow/blob/main/DEVELOPERS.md).
 
 For the workflow to work, there must be a repository of derivatives, this repository can be nexus or codeartifact depending on how it is configured.
+This example uses the aws best practice account to build and deploy the software to both a development and production infrastructure.
+The workflow has the same secret configured for both environments. In a real situation the secret will be different for each environment
+````
+````
+the workflow has the same secret configured for both environments. In a real situation the secret will be different for each environment. with this configuration the secrets aren't necessary
 
 Contributing
 ---
