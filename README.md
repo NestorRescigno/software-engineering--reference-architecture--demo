@@ -46,7 +46,6 @@ This repository implements the github action in the path .github/action.yml. the
 
 For the workflow to work, there must be a repository of derivatives, this repository can be nexus or codeartifact depending on how it is configured.
 This example uses the aws best practice account to build and deploy the software to both a development and production infrastructure.
-The workflow has the same secret configured for both environments. In a real situation the secret will be different for each environment
 ````
 ...
  aws-access-key: ${{secret.aws-access-key}}
@@ -56,8 +55,15 @@ The workflow has the same secret configured for both environments. In a real sit
  aws-secret-acesss-key-dev: ${{secret.aws-secret-access-key}}
 ...
 ````
-the workflow has the same secret configured for both environments. In a real situation the secret will be different for each environment. with this configuration the secrets aren't necessary
+the workflow has the same secret configured for both environments. In a real situation the secret will be different for each environment. with this configuration the secrets aren't necessary.
 
+We recommend that the image be kept in a separate account from the environments.
+````
+....
+ aws-access-key-op:                                # access key aws operational environment, this account containt shared image 
+ aws-secret-acesss-key-op:                         # secret access key aws operational environment, this account containt shared image 
+....
+````
 Contributing
 ---
 Briefly explains how your team members or others can contribute to the project
