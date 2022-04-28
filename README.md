@@ -60,5 +60,10 @@ the workflow has the same secret configured for both environments. In a real sit
 
 Contributing
 ---
+Briefly explains how your team members or others can contribute to the project
+
+For the contribution and workflow guide, see [CONTRIBUTING.md](./CONTRIBUTING.md).
+
 Maintainers
 ---
+Contact information of the team member whose is responsible for the project, see [CONTRIBUTING.md](./CONTRIBUTING.md).
