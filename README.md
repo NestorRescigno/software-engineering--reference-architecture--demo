@@ -33,7 +33,7 @@ In this phase, an image was generated that will be preserved for later deploymen
 
 Getting started
 ---
-The project contains a file called pom.xml, it is important that this file contains the version and the domain and the name of the package being developed, in our example it is **com.iag.swe.demo** with version **1.0.0-SNAPSHOT**. when the software deploys to publish environment the final version and the repository tag will be 1.0.0 version.
+The project contains a file called pom.xml, it is important that this file contains the version and the domain and the name of the package being developed, in our example it is **com.iag.swe.demo** with version **1.0.0-SNAPSHOT**. when the software deploys to publish environment the final version and the repository tag will be 1.0.0 version. The process deploy controls which versions are used. If a version already exists as a tag, it will request that it be increased to publish environment.
 ````
 ....
 <groupId>com.aig.swe</groupId>
@@ -41,7 +41,6 @@ The project contains a file called pom.xml, it is important that this file conta
 <version>1.0.0-SNAPSHOT</version>
 ....
 ````
-
 Contributing
 ---
 Maintainers
