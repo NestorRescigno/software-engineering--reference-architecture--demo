@@ -48,6 +48,13 @@ For the workflow to work, there must be a repository of derivatives, this reposi
 This example uses the aws best practice account to build and deploy the software to both a development and production infrastructure.
 The workflow has the same secret configured for both environments. In a real situation the secret will be different for each environment
 ````
+...
+ aws-access-key: ${{secret.aws-access-key}}
+ aws-secret-acesss-key: ${{secret.aws-secret-access-key}}
+... 
+ aws-access-key-dev: ${{secret.aws-access-key}}
+ aws-secret-acesss-key-dev: ${{secret.aws-secret-access-key}}
+...
 ````
 the workflow has the same secret configured for both environments. In a real situation the secret will be different for each environment. with this configuration the secrets aren't necessary
 
