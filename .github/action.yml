@@ -39,8 +39,10 @@ deploy:
         aws-environment-name: "production"                              # Environment name for default: 'production'
         aws-environment-prefix: "pro"                                   # Environment prefix name for default: 'pro'
         aws-access-key: ${{secret.aws_access_key}}                      # access key aws publish environment ( example: Integration, preproduction, quality)
-        aws-secret-acesss-key: ${{secrets.aws_secret_access_key}}        # secret access key aws publish environment ( example: Integration, preproduction, quality)
+        aws-secret-acesss-key: ${{secrets.aws_secret_access_key}}       # secret access key aws publish environment ( example: Integration, preproduction, quality)
         aws-environment-dev-name: "development"                         # Development environment name for default: 'development'
         aws-environment-dev-prefix: "dev"                               # Development environment prefix name for default: 'dev'
-        aws-access-key-dev: ${{secrets.aws_access_key}}                  # access key aws development environment
-        aws-secret-acesss-key-dev: ${{secrets.aws_secret_access_key}}    # secret access key aws development environment
+        aws-access-key-dev: ${{secrets.aws_access_key}}                 # access key aws development environment
+        aws-secret-acesss-key-dev: ${{secrets.aws_secret_access_key}}   # secret access key aws development environment
+        aws-access-key-op: ${{secrets.aws_access_key}}                  # access key aws operational environment, this account containt shared image 
+        aws-secret-acesss-key-op: ${{secrets.aws_secret_access_key}}    # secret access key aws operational environment, this account containt shared image
