@@ -25,7 +25,7 @@ deploy:
      # secrets:
      #   access-token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}              # access to repository. contact Software Enginnering for access and configure
       with:
-        project-name: "bestpratice"                                     # Product global name example: 'bestpratices' - require true, use in dns name
+        project-name: "best-practice"                                   # Product global name example: 'bestpratices' - require true, use in dns name
         lenguage-code: "java"                                           # lenguage programming code for example: java or angular - require true  
         ##### optional
         # testIntegration:                                              # run integration test, soap request or rest  default: false
