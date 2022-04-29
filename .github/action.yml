@@ -45,7 +45,7 @@ deploy:
         # repository-token: ${{secrets.nexus_key}}                      # pass registry artifact - if codeArtifact allow then token is auto generate. input is empty
         aws-environment-name: "production"                              # Environment name for default: 'production'
         aws-environment-prefix: "pro"                                   # Environment prefix name for default: 'pro'
-        aws-access-key: ${{secret.aws_access_key}}                      # access key aws publish environment ( example: Integration, preproduction, quality)
+        aws-access-key: ${{secrets.aws_access_key}}                     # access key aws publish environment ( example: Integration, preproduction, quality)
         aws-secret-acesss-key: ${{secrets.aws_secret_access_key}}       # secret access key aws publish environment ( example: Integration, preproduction, quality)
         aws-environment-dev-name: "development"                         # Development environment name for default: 'development'
         aws-environment-dev-prefix: "dev"                               # Development environment prefix name for default: 'dev'
