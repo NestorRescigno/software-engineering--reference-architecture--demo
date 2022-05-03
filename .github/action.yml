@@ -13,7 +13,11 @@
 name: CI
 on:
 # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+workflow_dispatch:
+    inputs:
+      ami_version:
+        description: 'Version'
+        required: true
 #  pull_request:
     # Sequence of patterns matched against refs/heads
 #    branches: [ main, develop ]
