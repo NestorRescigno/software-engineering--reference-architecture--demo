@@ -28,7 +28,7 @@ jobs:
             ref: 'main'
             path: '.github/cicd'    
         - name: build
-          uses: ./.github/cicd/github_actions/deploy/build
+          uses: ./.github/cicd/github_actions/build
           with:
               project_name: "best-practice"
               codeartifact-allow: true                                        # active true repositorio codeartifact - required: true - default: false (nexus adopt)
