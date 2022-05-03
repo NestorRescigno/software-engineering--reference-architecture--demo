@@ -21,7 +21,7 @@ on: [pull_request]
 deploy:
   steps:
     - name: deploy 
-      uses: Iberia-Ent/software-engineering--reference-architecture--workflow/.github/action/action.yml@main
+      uses: http://${{secrets.TOKEN_REP}}@github.com/Iberia-Ent/software-engineering--reference-architecture--workflow/.github/action/action.yml@main
      # secrets:
      #   access-token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}              # access to repository. contact Software Enginnering for access and configure
       with:
