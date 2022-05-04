@@ -34,6 +34,8 @@ jobs:
           with:
               project_name: "best-practice"
               lenguage-code: "java"
+              aws-access-key: ${{secrets.AWS_ACCESS_KEY}} 
+              aws-secret-acesss-key: ${{secrets.AWS_SECRET_ACCESS_KEY}} 
               codeartifact-allow: true # active true repositorio codeartifact - required: true - default: false (nexus adopt)
               repository-host:  ${{secrets.CODEARTIFACT_URL}}                  # host registry artifact - if codeArtifact allow then dns is example: my_domain-111122223333.d.codeartifact.us-west-2.amazonaws.com
               repository-user: ${{secrets.CODEARTIFACT_OWNER}}                # user registry artifact - if codeArtifact allow then user is owner aws id.
