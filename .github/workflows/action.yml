@@ -20,6 +20,8 @@ jobs:
   deploy:
     runs-on: [ancillaries, build]
     steps:
+        - name: Checkout source
+          uses: actions/checkout@v2
         - name: Checkout actions
           uses: actions/checkout@v2
           with:
