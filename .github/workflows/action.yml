@@ -18,7 +18,7 @@ on:
 #    branches: [ main, develop ]
 jobs:
   deploy:
-    runs-on: [ancillaries]
+    runs-on: [ancillaries, build]
     steps:
         - name: Checkout actions
           uses: actions/checkout@v2
