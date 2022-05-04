@@ -35,4 +35,7 @@ jobs:
               repository-DNS:  ${{secrets.CODEARTIFACT_URL}}                  # host registry artifact - if codeArtifact allow then dns is example: my_domain-111122223333.d.codeartifact.us-west-2.amazonaws.com
               repository-user: ${{secrets.CODEARTIFACT_OWNER}}                # user registry artifact - if codeArtifact allow then user is owner aws id.
                   ### Disable because is codeArtifact
-                # repository-token: ${{secrets.nexus_key}} 
+                # repository-token: ${{secrets.nexus_key}}
+        - name: clean
+          shell: bash
+          run: rm -rf *
