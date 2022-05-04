@@ -38,4 +38,4 @@ jobs:
                 # repository-token: ${{secrets.nexus_key}}
         - name: clean
           shell: bash
-          run: rm -rf *
+          run: cd ${{ github.workspace }} && rm -rf *
