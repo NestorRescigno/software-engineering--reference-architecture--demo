@@ -36,6 +36,6 @@ jobs:
               repository-user: ${{secrets.CODEARTIFACT_OWNER}}                # user registry artifact - if codeArtifact allow then user is owner aws id.
                   ### Disable because is codeArtifact
                 # repository-token: ${{secrets.nexus_key}}
-        - name: clean
-          shell: bash
-          run: cd ${{ github.workspace }} && rm -rf *
+        # - name: clean
+        #  shell: bash
+        #  run: cd ${{ github.workspace }} && rm -rf *
