@@ -19,6 +19,10 @@ on:
 env:
   PROJECT: "best-practice"
   LENGUAGE: "java"
+  ENVIROMENT_DEV: "development"
+  ENVIROMENT_DEV_PREFIX: "dev"
+  ENVIROMENT_INT: "integration"
+  ENVIROMENT_INT_PREFIX: "int"
 jobs:
   deploy:
     runs-on: [ancillaries, build]
@@ -36,14 +40,31 @@ jobs:
             path: '.github/cicd'
         # Configure step build process    
         - name: build
+          id: output-build
           uses: ./.github/cicd/github_actions/build
           with:
               project_name: ${{ env.PROJECT }}
               lenguage-code: ${{ env.LENGUAGE }}
               aws-access-key: ${{secrets.AWS_ACCESS_KEY}} 
-              aws-secret-acesss-key: ${{secrets.AWS_SECRET_ACCESS_KEY}} 
-              codeartifact-allow: true # active true repositorio codeartifact - required: true - default: false (nexus adopt)
-              repository-user: ${{secrets.CODEARTIFACT_OWNER}}                # user registry artifact - if codeArtifact allow then user is owner aws id.
+              aws-secret-acesss-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+              # active true repositorio codeartifact - required: true - default: false (nexus adopt)      
+              # user registry artifact - if codeArtifact allow then user is owner aws id.
+              codeartifact-allow: true
+              repository-user: ${{secrets.CODEARTIFACT_OWNER}}                
               ### Disable because is codeArtifact
               # repository-host:  ${{secrets.nexus_url}}                  
               # repository-token: ${{secrets.nexus_key}}
+          # Configure step build process    
+        - name: environment
+          uses: ./.github/cicd/github_actions/environment
+          with:
+              project_name: ${{ env.PROJECT }}
+              service_name: ${{ steps.output-build.outputs.package-artifactid-name }}
+              group_name:   ${{ steps.output-build.outputs.package-groupid-name }}
+              aws-access-key: ${{ secrets.AWS_ACCESS_KEY }} 
+              aws-secret-acesss-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+              aws-environment-name: ${{ env.ENVIROMENT_INT }}
+              aws-environment-prefix: ${{ env.ENVIROMENT_INT_PREFIX }}
+              aws-environment-dev-name: ${{ env.ENVIROMENT_DEV }}
+              aws-environment-dev-prefix: ${{ env.ENVIROMENT_DEV_PREFIX }}
+              
