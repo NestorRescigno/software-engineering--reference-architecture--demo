@@ -39,7 +39,7 @@ jobs:
           uses: ./.github/cicd/github_actions/build
           with:
               project_name: ${{ env.PROJECT }}
-              lenguage-code: ${{ env.PROJECT }}
+              lenguage-code: ${{ env.LENGUAGE }}
               aws-access-key: ${{secrets.AWS_ACCESS_KEY}} 
               aws-secret-acesss-key: ${{secrets.AWS_SECRET_ACCESS_KEY}} 
               codeartifact-allow: true # active true repositorio codeartifact - required: true - default: false (nexus adopt)
