@@ -63,7 +63,7 @@ jobs:
           id: output-build
           uses: ./.github/cicd/github_actions/build
           with:
-              project_name: ${{ env.PROJECT }}
+              project-name: ${{ env.PROJECT }}
               lenguage-code: ${{ env.LENGUAGE }}
               aws-access-key: ${{secrets.AWS_ACCESS_KEY}} 
               aws-secret-acesss-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
@@ -78,11 +78,11 @@ jobs:
         # - name: scan
         #  uses: ./.github/cicd/github_actions/scan
         #  with:
-        #      project_name: ${{ env.PROJECT }}
+        #      project-name: ${{ env.PROJECT }}
         #      lenguage-code: ${{ env.LENGUAGE }}
-        #      service_name: ${{ steps.output-build.outputs.package-artifactid-name }}
-        #      service_version: ${{ steps.output-build.outputs.package-version-name }}
-        #      service_package: ${{ steps.output-build.outputs.package-type-name }}
+        #      service-name: ${{ steps.output-build.outputs.package-artifactid-name }}
+        #      service-version: ${{ steps.output-build.outputs.package-version-name }}
+        #      service-package: ${{ steps.output-build.outputs.package-type-name }}
         #      group_name: ${{ steps.output-build.outputs.package-groupid-name }}
         #      scancode-allow: ${{ env.SCANCODE_ALLOW }}
         #      sonarqube-host: ${{ env.SONAR_HOST }}
@@ -97,9 +97,9 @@ jobs:
           id: output-environment
           uses: ./.github/cicd/github_actions/environment
           with:
-              project_name: ${{ env.PROJECT }}
-              service_name: ${{ steps.output-build.outputs.package-artifactid-name }}
-              group_name:   ${{ steps.output-build.outputs.package-groupid-name }}
+              project-name: ${{ env.PROJECT }}
+              service-name: ${{ steps.output-build.outputs.package-artifactid-name }}
+              group-name:   ${{ steps.output-build.outputs.package-groupid-name }}
               aws-access-key: ${{ secrets.AWS_ACCESS_KEY }} 
               aws-secret-acesss-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
               aws-environment-name: ${{ env.ENVIROMENT_INT }}
