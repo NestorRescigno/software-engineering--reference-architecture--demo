@@ -75,23 +75,23 @@ jobs:
               # repository-host:  ${{secrets.nexus_url}}                  
               # repository-token: ${{secrets.nexus_key}}
         # Configure step scan code process
-        - name: scan
-          uses: ./.github/cicd/github_actions/scan
-          with:
-              project_name: ${{ env.PROJECT }}
-              lenguage-code: ${{ env.LENGUAGE }}
-              service_name: ${{ steps.output-build.outputs.package-artifactid-name }}
-              service_version: ${{ steps.output-build.outputs.package-version-name }}
-              service_package: ${{ steps.output-build.outputs.package-type-name }}
-              group_name: ${{ steps.output-build.outputs.package-groupid-name }}
-              scancode-allow: ${{ env.SCANCODE_ALLOW }}
-              sonarqube-host: ${{ env.SONAR_HOST }}
-              sonarqube-user: ${{ env.SONAR_USER }}
-              sonarqube-token: ${{ env.SONAR_TOKEN }}
-              sonarqube-client-version: ${{ env.SONAR_CL_VER }}
-              vulnerability-host: ${{ env.VULNERABILITY_HOST }}
-              vulnerability-user: ${{ env.VULNERABILITY_USER }}
-              vulnerability-token: ${{ env.VULNERABILITY_TOKEN }}
+        # - name: scan
+        #  uses: ./.github/cicd/github_actions/scan
+        #  with:
+        #      project_name: ${{ env.PROJECT }}
+        #      lenguage-code: ${{ env.LENGUAGE }}
+        #      service_name: ${{ steps.output-build.outputs.package-artifactid-name }}
+        #      service_version: ${{ steps.output-build.outputs.package-version-name }}
+        #      service_package: ${{ steps.output-build.outputs.package-type-name }}
+        #      group_name: ${{ steps.output-build.outputs.package-groupid-name }}
+        #      scancode-allow: ${{ env.SCANCODE_ALLOW }}
+        #      sonarqube-host: ${{ env.SONAR_HOST }}
+        #      sonarqube-user: ${{ env.SONAR_USER }}
+        #      sonarqube-token: ${{ env.SONAR_TOKEN }}
+        #      sonarqube-client-version: ${{ env.SONAR_CL_VER }}
+        #      vulnerability-host: ${{ env.VULNERABILITY_HOST }}
+        #      vulnerability-user: ${{ env.VULNERABILITY_USER }}
+        #      vulnerability-token: ${{ env.VULNERABILITY_TOKEN }}
         # configure environment build process.
         - name: environment
           id: output-environment
@@ -107,23 +107,23 @@ jobs:
               aws-environment-dev-name: ${{ env.ENVIROMENT_DEV }}
               aws-environment-dev-prefix: ${{ env.ENVIROMENT_DEV_PREFIX }}
         # configure deploy configure
-        - name: deploy
-          uses: ./.github/cicd/github_actions/deploy
-          with:
-              project_name: ${{ env.PROJECT }}
-              lenguage-code: ${{ env.LENGUAGE }}
-              aws-access-key: ${{secrets.AWS_ACCESS_KEY}} 
-              aws-secret-acesss-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
-              service_name: ${{ steps.output-build.outputs.package-artifactid-name }}
-              service_version: ${{ steps.output-build.outputs.package-version-name }}
-              service_package: ${{ steps.output-build.outputs.package-type-name }}
-              group_name: ${{ steps.output-build.outputs.package-groupid-name }}
-              codeartifact-allow: true
-              repository-user: ${{secrets.CODEARTIFACT_OWNER}}
-              shared-number-ids-arn-suffix: ${{ steps.output-environment.outputs.shared-number-ids-arn-suffix }}
-              security-group-number-ids: ${{ steps.output-environment.outputs.security-group-number-ids }}
-              subnet-number-ids: ${{ steps.output-environment.outputs.subnet-number-ids }}
-              alb-target-group-number-arn: ${{ steps.output-environment.alb-target-group-number-arn }}
-              alb-target-group-number-arn-suffix: ${{ steps.output-environment.outputs.alb-target-group-number-arn-suffix }}
-              lb-number-arn-suffix: ${{ steps.output-environment.outputs.lb-number-arn-suffix }}
-              testIntegration-allow: false
+        # - name: deploy
+        #  uses: ./.github/cicd/github_actions/deploy
+        #  with:
+        #      project_name: ${{ env.PROJECT }}
+        #      lenguage-code: ${{ env.LENGUAGE }}
+        #      aws-access-key: ${{secrets.AWS_ACCESS_KEY}} 
+        #      aws-secret-acesss-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+        #      service_name: ${{ steps.output-build.outputs.package-artifactid-name }}
+        #      service_version: ${{ steps.output-build.outputs.package-version-name }}
+        #      service_package: ${{ steps.output-build.outputs.package-type-name }}
+        #      group_name: ${{ steps.output-build.outputs.package-groupid-name }}
+        #      codeartifact-allow: true
+        #      repository-user: ${{secrets.CODEARTIFACT_OWNER}}
+        #      shared-number-ids-arn-suffix: ${{ steps.output-environment.outputs.shared-number-ids-arn-suffix }}
+        #      security-group-number-ids: ${{ steps.output-environment.outputs.security-group-number-ids }}
+        #      subnet-number-ids: ${{ steps.output-environment.outputs.subnet-number-ids }}
+        #      alb-target-group-number-arn: ${{ steps.output-environment.alb-target-group-number-arn }}
+        #      alb-target-group-number-arn-suffix: ${{ steps.output-environment.outputs.alb-target-group-number-arn-suffix }}
+        #      lb-number-arn-suffix: ${{ steps.output-environment.outputs.lb-number-arn-suffix }}
+        #      testIntegration-allow: false
