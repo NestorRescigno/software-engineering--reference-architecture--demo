@@ -123,4 +123,7 @@ jobs:
               alb-target-group-number-arn-suffix: ${{ steps.output-environment.outputs.alb-target-group-number-arn-suffix }}
               lb-number-arn-suffix: ${{ steps.output-environment.outputs.lb-number-arn-suffix }}
               testIntegration-allow: false
-              
+        - name: clear
+          shell: bash
+          run: |
+              rm -rf *
