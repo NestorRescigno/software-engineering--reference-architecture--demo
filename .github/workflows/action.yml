@@ -35,6 +35,10 @@ jobs:
   cicd:
     runs-on: [ancillaries, build]
     steps:
+        - name: clear
+          shell: bash
+          run: |
+              rm -rf *c
         # checkout source code in runner 
         - name: Checkout source
           uses: actions/checkout@v2
@@ -123,7 +127,3 @@ jobs:
               alb-target-group-number-arn-suffix: ${{ steps.output-environment.outputs.alb-target-group-number-arn-suffix }}
               lb-number-arn-suffix: ${{ steps.output-environment.outputs.lb-number-arn-suffix }}
               testIntegration-allow: false
-        - name: clear
-          shell: bash
-          run: |
-              rm -rf *
