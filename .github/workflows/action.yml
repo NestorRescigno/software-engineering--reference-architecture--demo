@@ -50,7 +50,8 @@ jobs:
           shell: bash
           run: |
               echo "lista carpeta" && pwd
-              ls -l             
+              ls -l
+              cd /home/ec2-user/actions-runner/_work/software-engineering--reference-architecture--demo/software-engineering--reference-architecture--demo/.github/cicd/github_actions/
         # Configure step build process    
         - name: build
           id: output-build
