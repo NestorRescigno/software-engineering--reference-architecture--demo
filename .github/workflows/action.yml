@@ -35,10 +35,6 @@ jobs:
   cicd:
     runs-on: [ancillaries, build]
     steps:
-        - name: clear
-          shell: bash
-          run: |
-              rm -rf *c
         # checkout source code in runner 
         - name: Checkout source
           uses: actions/checkout@v2
@@ -50,14 +46,6 @@ jobs:
             token: ${{ secrets.TOKEN_REP }}
             ref: 'main'
             path: '.github/cicd'
-        - name: findfolder
-          shell: bash
-          run: |
-              echo "lista carpeta" && pwd
-              ls -l
-              cd /home/ec2-user/actions-runner/_work/software-engineering--reference-architecture--demo/software-engineering--reference-architecture--demo/.github/cicd/github_actions/environment
-              echo "lista carpeta workflow" && pwd
-              ls -l
         # Configure step build process    
         - name: build
           id: output-build
