@@ -106,10 +106,10 @@ jobs:
              aws-environment-prefix: ${{ env.ENVIROMENT_INT_PREFIX }}
              aws-environment-dev-name: ${{ env.ENVIROMENT_DEV }}
              aws-environment-dev-prefix: ${{ env.ENVIROMENT_DEV_PREFIX }}
-             service_name: ${{ steps.output-build.outputs.package-artifactid-name }}
-             service_version: ${{ steps.output-build.outputs.package-version-name }}
-             service_package: ${{ steps.output-build.outputs.package-type-name }}
-             group_name: ${{ steps.output-build.outputs.package-groupid-name }}
+             service-name: ${{ steps.output-build.outputs.package-artifactid-name }}
+             service-version: ${{ steps.output-build.outputs.package-version-name }}
+             service-package: ${{ steps.output-build.outputs.package-type-name }}
+             group-name: ${{ steps.output-build.outputs.package-groupid-name }}
              codeartifact-allow: true
              repository-user: ${{secrets.CODEARTIFACT_OWNER}}
              testIntegration-allow: false
