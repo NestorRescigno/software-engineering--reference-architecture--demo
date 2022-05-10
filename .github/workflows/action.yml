@@ -23,6 +23,7 @@ env:
   ENVIROMENT_DEV_PREFIX: "dev"
   ENVIROMENT_INT: "integration"
   ENVIROMENT_INT_PREFIX: "int"
+  INSTANCE_TYPE: "t4g.micro"
   SCANCODE_ALLOW: false
   SONAR_HOST: ""
   SONAR_USER: ""
@@ -106,6 +107,7 @@ jobs:
              aws-environment-prefix: ${{ env.ENVIROMENT_INT_PREFIX }}
              aws-environment-dev-name: ${{ env.ENVIROMENT_DEV }}
              aws-environment-dev-prefix: ${{ env.ENVIROMENT_DEV_PREFIX }}
+             aws-instance-type: ${{ env.INSTANCE_TYPE }}
              service-name: ${{ steps.output-build.outputs.package-artifactid-name }}
              service-version: ${{ steps.output-build.outputs.package-version-name }}
              service-package: ${{ steps.output-build.outputs.package-type-name }}
