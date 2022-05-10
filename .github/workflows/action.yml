@@ -98,7 +98,7 @@ jobs:
         - name: deploy
           uses: ./.github/cicd/github_actions/deploy
           with:
-             project_name: ${{ env.PROJECT }}
+             project-name: ${{ env.PROJECT }}
              lenguage-code: ${{ env.LENGUAGE }}
              aws-access-key: ${{secrets.AWS_ACCESS_KEY}} 
              aws-secret-acesss-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
