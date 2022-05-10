@@ -95,23 +95,24 @@ jobs:
               aws-environment-dev-name: ${{ env.ENVIROMENT_DEV }}
               aws-environment-dev-prefix: ${{ env.ENVIROMENT_DEV_PREFIX }}
         # configure deploy configure
-        # - name: deploy
-        #  uses: ./.github/cicd/github_actions/deploy
-        #  with:
-        #      project_name: ${{ env.PROJECT }}
-        #      lenguage-code: ${{ env.LENGUAGE }}
-        #      aws-access-key: ${{secrets.AWS_ACCESS_KEY}} 
-        #      aws-secret-acesss-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
-        #      service_name: ${{ steps.output-build.outputs.package-artifactid-name }}
-        #      service_version: ${{ steps.output-build.outputs.package-version-name }}
-        #      service_package: ${{ steps.output-build.outputs.package-type-name }}
-        #      group_name: ${{ steps.output-build.outputs.package-groupid-name }}
-        #      codeartifact-allow: true
-        #      repository-user: ${{secrets.CODEARTIFACT_OWNER}}
+        - name: deploy
+          uses: ./.github/cicd/github_actions/deploy
+          with:
+             project_name: ${{ env.PROJECT }}
+             lenguage-code: ${{ env.LENGUAGE }}
+             aws-access-key: ${{secrets.AWS_ACCESS_KEY}} 
+             aws-secret-acesss-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+             service_name: ${{ steps.output-build.outputs.package-artifactid-name }}
+             service_version: ${{ steps.output-build.outputs.package-version-name }}
+             service_package: ${{ steps.output-build.outputs.package-type-name }}
+             group_name: ${{ steps.output-build.outputs.package-groupid-name }}
+             codeartifact-allow: true
+             repository-user: ${{secrets.CODEARTIFACT_OWNER}}
+             testIntegration-allow: false
         #      shared-number-ids-arn-suffix: ${{ steps.output-environment.outputs.shared-number-ids-arn-suffix }}
         #      security-group-number-ids: ${{ steps.output-environment.outputs.security-group-number-ids }}
         #      subnet-number-ids: ${{ steps.output-environment.outputs.subnet-number-ids }}
         #      alb-target-group-number-arn: ${{ steps.output-environment.alb-target-group-number-arn }}
         #      alb-target-group-number-arn-suffix: ${{ steps.output-environment.outputs.alb-target-group-number-arn-suffix }}
         #      lb-number-arn-suffix: ${{ steps.output-environment.outputs.lb-number-arn-suffix }}
-        #      testIntegration-allow: false
+        
