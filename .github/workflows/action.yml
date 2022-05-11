@@ -115,7 +115,7 @@ jobs:
              codeartifact-allow: true
              repository-owner: ${{secrets.CODEARTIFACT_OWNER}}
              repository-user: ${{ steps.output-build.outputs.package-usr }}
-             repository-token: ${{ steps.output-build.outputs.package-groupid-name }}
-             repository-host: ${{ steps.output-build.outputs.package-key }}
+             repository-token: ${{ steps.output-build.outputs.package-key }}
+             repository-host: ${{ steps.output-build.outputs.package-url }}
              repository-id: ${{ steps.output-build.outputs.package-repository }}
              testIntegration-allow: false
