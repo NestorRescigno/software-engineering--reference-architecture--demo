@@ -113,12 +113,9 @@ jobs:
              service-package: ${{ steps.output-build.outputs.package-type-name }}
              group-name: ${{ steps.output-build.outputs.package-groupid-name }}
              codeartifact-allow: true
-             repository-user: ${{secrets.CODEARTIFACT_OWNER}}
+             repository-owner: ${{secrets.CODEARTIFACT_OWNER}}
+             repository-user: ${{ steps.output-build.outputs.package-usr }}
+             repository-token: ${{ steps.output-build.outputs.package-groupid-name }}
+             repository-host: ${{ steps.output-build.outputs.package-key }}
+             repository-id: ${{ steps.output-build.outputs.package-repository }}
              testIntegration-allow: false
-        #      shared-number-ids-arn-suffix: ${{ steps.output-environment.outputs.shared-number-ids-arn-suffix }}
-        #      security-group-number-ids: ${{ steps.output-environment.outputs.security-group-number-ids }}
-        #      subnet-number-ids: ${{ steps.output-environment.outputs.subnet-number-ids }}
-        #      alb-target-group-number-arn: ${{ steps.output-environment.alb-target-group-number-arn }}
-        #      alb-target-group-number-arn-suffix: ${{ steps.output-environment.outputs.alb-target-group-number-arn-suffix }}
-        #      lb-number-arn-suffix: ${{ steps.output-environment.outputs.lb-number-arn-suffix }}
-        
