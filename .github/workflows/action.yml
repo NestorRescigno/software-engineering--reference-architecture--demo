@@ -38,10 +38,10 @@ jobs:
     steps:
         # checkout source code in runner 
         - name: Checkout source
-          uses: actions/checkout@v2
+          uses: actions/checkout@v2.4.2
         # checkout source workflow action base in runner   
         - name: Checkout actions
-          uses: actions/checkout@v2
+          uses: actions/checkout@v2.4.2
           with:
             repository: 'Iberia-Ent/software-engineering--reference-architecture--workflow'
             token: ${{ secrets.TOKEN_REP }}
