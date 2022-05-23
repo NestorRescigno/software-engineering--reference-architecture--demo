@@ -9,4 +9,5 @@ jobs:
         - name: Checkout source
           uses: actions/checkout@v2.4.2
         - name: testrun
-          run: ping
+          run: aws configure get && aws -version
+            
