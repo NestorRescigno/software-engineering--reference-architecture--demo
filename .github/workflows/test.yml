@@ -1,0 +1,14 @@
+name: test
+on:
+    workflow_dispatch:
+env:
+  VARIABLE:"HOLA"
+jobs:
+  cicd:
+    runs-on: [Operation]
+    steps:
+        # checkout source code in runner 
+        - name: Checkout source
+          uses: actions/checkout@v2.4.2
+        - name: testrun
+          run: ping
