@@ -34,8 +34,8 @@ env:
   VULNERABILITY_TOKEN: ""
 jobs:
   cicd:
-    # runs-on: [ancillaries, build]
-    runs-on: [Integration]
+    runs-on: [ancillaries, ami]
+    # runs-on: [Integration]
     steps:
         # checkout source code in runner 
         - name: Checkout source
