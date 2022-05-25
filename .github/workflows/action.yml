@@ -35,7 +35,7 @@ env:
 jobs:
   cicd:
     # runs-on: [ancillaries, build]
-    runs-on: [Integracion]
+    runs-on: [Integration]
     steps:
         # checkout source code in runner 
         - name: Checkout source
