@@ -73,7 +73,7 @@ jobs:
               service-name: ${{ steps.output-build.outputs.package-artifactid-name }}
               service-version: ${{ steps.output-build.outputs.package-version-name }}
         #      service-package: ${{ steps.output-build.outputs.package-type-name }}
-              group_name: ${{ steps.output-build.outputs.package-groupid-name }}
+              group-name: ${{ steps.output-build.outputs.package-groupid-name }}
         #      scancode-allow: ${{ env.SCANCODE_ALLOW }}
               sonarqube-host: ${{ env.SONAR_HOST }}
               sonarqube-user: ${{ env.SONAR_USER }}
