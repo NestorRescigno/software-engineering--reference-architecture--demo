@@ -65,19 +65,19 @@ jobs:
               # repository-host:  ${{secrets.nexus_url}}                  
               # repository-token: ${{secrets.nexus_key}}
         # Configure step scan code process
-        ## - name: scan
-        ##  uses: ./.github/cicd/github_actions/scan
-        ##  with:
-        ##      project-name: ${{ env.PROJECT }}
-        ##      lenguage-code: ${{ env.LENGUAGE }}
-        ##      service-name: ${{ steps.output-build.outputs.package-artifactid-name }}
-        ##      service-version: ${{ steps.output-build.outputs.package-version-name }}
+        - name: scan
+          uses: ./.github/cicd/github_actions/scan
+          with:
+              project-name: ${{ env.PROJECT }}
+              lenguage-code: ${{ env.LENGUAGE }}
+              service-name: ${{ steps.output-build.outputs.package-artifactid-name }}
+              service-version: ${{ steps.output-build.outputs.package-version-name }}
         #      service-package: ${{ steps.output-build.outputs.package-type-name }}
         #      group-name: ${{ steps.output-build.outputs.package-groupid-name }}
         #      scancode-allow: ${{ env.SCANCODE_ALLOW }}
-        ##      sonarqube-host: ${{ env.SONAR_HOST }}
-        ##      sonarqube-user: ${{ env.SONAR_USER }}
-        ##      sonarqube-token: ${{ env.SONAR_TOKEN }}
+              sonarqube-host: ${{ env.SONAR_HOST }}
+              sonarqube-user: ${{ env.SONAR_USER }}
+              sonarqube-token: ${{ env.SONAR_TOKEN }}
         #      sonarqube-client-version: ${{ env.SONAR_CL_VER }}
         #      vulnerability-host: ${{ env.VULNERABILITY_HOST }}
         #      vulnerability-user: ${{ env.VULNERABILITY_USER }}
