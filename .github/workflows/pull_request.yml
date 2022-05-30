@@ -3,7 +3,22 @@ name: Pull Request
 on:
   pull_request:
     branches: [ main ]
-
+env:
+  PROJECT: "best-practice"
+  LENGUAGE: "java"
+  ENVIROMENT_DEV: "development"
+  ENVIROMENT_DEV_PREFIX: "dev"
+  ENVIROMENT_INT: "integration"
+  ENVIROMENT_INT_PREFIX: "int"
+  INSTANCE_TYPE: "t4g.micro"
+  SCANCODE_ALLOW: false
+  SONAR_HOST: "https://sonar.corp.iberia.es"
+  SONAR_USER:  ${{ secrets.IBIS_SONAR_REPO_USER }}
+  SONAR_TOKEN:  ${{ secrets.IBIS_SONAR_REPO_PASS }}
+  SONAR_CL_VER: ""
+  VULNERABILITY_HOST: ""
+  VULNERABILITY_USER: ""
+  VULNERABILITY_TOKEN: ""
 jobs:
   scan:
     runs-on: [self-hosted, ancillaries]
