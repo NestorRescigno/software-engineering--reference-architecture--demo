@@ -4,108 +4,60 @@ on:
   release:
     types:
       - created
+env:
+  PROJECT: "best-practice"
+  LENGUAGE: "java"
+  ENVIROMENT_DEV: "development"
+  ENVIROMENT_DEV_PREFIX: "dev"
+  ENVIROMENT_INT: "integration"
+  ENVIROMENT_INT_PREFIX: "int"
+  INSTANCE_TYPE: "t4g.micro"
+  SCANCODE_ALLOW: false
+  SONAR_HOST: "https://sonar.corp.iberia.es"
+  SONAR_USER:  ${{ secrets.IBIS_SONAR_REPO_USER }}
+  SONAR_TOKEN:  ${{ secrets.IBIS_SONAR_REPO_PASS }}
+  SONAR_CL_VER: ""
+  VULNERABILITY_HOST: ""
+  VULNERABILITY_USER: ""
+  VULNERABILITY_TOKEN: ""
 jobs:
   build_artifact:
     name: Build Artifact
     runs-on: [self-hosted, ancillaries, ami]
-    env:
-      IBIS_NEXUS_REPO_USER: ${{ secrets.IBIS_NEXUS_REPO_USER }}
-      IBIS_NEXUS_REPO_PASS: ${{ secrets.IBIS_NEXUS_REPO_PASS }}
-      IBIS_PACT_BROKER_USERNAME: ${{ secrets.IBIS_PACT_BROKER_USERNAME }}
-      IBIS_PACT_BROKER_PASSWORD: ${{ secrets.IBIS_PACT_BROKER_PASSWORD }}
-      GITHUB_TOKEN_ENV: ${{ secrets.GITHUB_TOKEN }}
-    outputs:
-      ARTIFACT_VERSION: ${{ env.ARTIFACT_VERSION }}
-      MICROSERVICE_NAME: ${{ env.MICROSERVICE_NAME }}
-      ARTIFACT_ID: ${{ env.ARTIFACT_ID }}
-      ARTIFACT_GROUP_ID: ${{ env.ARTIFACT_GROUP_ID }}
-
-    steps: 
-    - name: Checkout source code
-      uses: actions/checkout@v2
-      with:
-        ref: ${{ github.ref }}
-    
-    - name: Checkout actions
-      uses: actions/checkout@v2
-      with:
-        repository: 'Iberia-Ent/commercial--management--ancillaries--workflows'
-        token: ${{ secrets.GH_PAT_CICD_ANCILLARIES }}
-        ref: '1.0'
-        path: '.github/cicd-ancillaries'
-
-    - name: Set up JDK 11
-      uses: actions/setup-java@v2
-      with:
-        distribution: 'temurin'
-        java-version: '11'
-
-    - name: Set up Maven 3.8.2
-      uses: stCarolas/setup-maven@v4.2
-      with:
-        maven-version: 3.8.2
-    
-    - name: Build Artifact
-      uses: ./.github/cicd-ancillaries/github_actions/ci/rlse/artifact
-
-  build_docs:
-    name: Build Documentations
-    needs: [build_artifact]
-    runs-on: [self-hosted, ancillaries, ami]
-    env:
-      IBIS_NEXUS_REPO_USER: ${{ secrets.IBIS_NEXUS_REPO_USER }}
-      IBIS_NEXUS_REPO_PASS: ${{ secrets.IBIS_NEXUS_REPO_PASS }}
-      GITHUB_TOKEN_ENV: ${{ secrets.GITHUB_TOKEN }}
-      ARTIFACT_VERSION: ${{ needs.build_artifact.outputs.ARTIFACT_VERSION }}
-      MICROSERVICE_NAME: ${{ needs.build_artifact.outputs.MICROSERVICE_NAME }}
-
-    steps: 
-    - name: Checkout source code
-      uses: actions/checkout@v2
-      with:
-        ref: ${{ github.ref }}
-
-    - name: Checkout actions
-      uses: actions/checkout@v2
-      with:
-        repository: 'Iberia-Ent/commercial--management--ancillaries--workflows'
-        token: ${{ secrets.GH_PAT_CICD_ANCILLARIES }}
-        ref: '1.0'
-        path: '.github/cicd-ancillaries'
-    
-    - name: Set up Node 14
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14'
-
-    - name: Build Docs
-      uses: ./.github/cicd-ancillaries/github_actions/ci/rlse/docs
-
+    steps:
+        # clear source
+        - name: clear
+          run: sudo rm -rf *
+        # checkout source code in runner 
+        - name: Checkout source
+          uses: actions/checkout@v2.4.2
+        # checkout source workflow action base in runner   
+        - name: Checkout actions
+          uses: actions/checkout@v2.4.2
+          with:
+            repository: 'Iberia-Ent/software-engineering--reference-architecture--workflow'
+            token: ${{ secrets.TOKEN_REP }}
+            ref: 'main'
+            path: '.github/cicd'
+        # Configure step build process    
+        - name: build
+          id: output-build
+          uses: ./.github/cicd/github_actions/build
+          with:
+              project-name: ${{ env.PROJECT }}
+              lenguage-code: ${{ env.LENGUAGE }}
+              aws-access-key: ${{secrets.AWS_ACCESS_KEY}} 
+              aws-secret-acesss-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+              # active true repositorio codeartifact - required: true - default: false (nexus adopt)      
+              # user registry artifact - if codeArtifact allow then user is owner aws id.
+              codeartifact-allow: true
+              repository-user: ${{secrets.CODEARTIFACT_OWNER}}                
+              ### Disable because is codeArtifact
+              # repository-host:  ${{secrets.nexus_url}}                  
+              # repository-token: ${{secrets.nexus_key}}
   build_ami:
     name: Build AMI
-    needs: [build_artifact, build_docs]
+    needs: [build_artifact]
     runs-on: [self-hosted, ancillaries, ami]
-    env:
-      ARTIFACT_VERSION: ${{ needs.build_artifact.outputs.ARTIFACT_VERSION }}
-      MICROSERVICE_NAME: ${{ needs.build_artifact.outputs.MICROSERVICE_NAME }}
-      ARTIFACT_ID: ${{ needs.build_artifact.outputs.ARTIFACT_ID }}
-      ARTIFACT_GROUP_ID: ${{ needs.build_artifact.outputs.ARTIFACT_GROUP_ID }}
-      AWS_ANCILLARIES_ACCESS_KEY_ID: ${{ secrets.AWS_ANCILLARIES_ACCESS_KEY_ID }}
-      AWS_ANCILLARIES_SECRET_ACCESS_KEY: ${{ secrets.AWS_ANCILLARIES_SECRET_ACCESS_KEY }}
-
     steps:
     - name: Checkout actions
-      uses: actions/checkout@v2
-      with:
-        repository: 'Iberia-Ent/commercial--management--ancillaries--workflows'
-        token: ${{ secrets.GH_PAT_CICD_ANCILLARIES }}
-        ref: '1.0'
-        path: '.github/cicd-ancillaries'
-    
-    - name: Set up Packer 1.6.6
-      uses: hashicorp-contrib/setup-packer@v1
-      with:
-        packer-version: 1.6.6
-
-    - name: Build AMI
-      uses: ./.github/cicd-ancillaries/github_actions/ci/rlse/ami
