@@ -1,0 +1,76 @@
+name: Deploy to Development
+
+on:
+  workflow_dispatch:
+    inputs:
+      ami_version:
+        description: 'Version'
+        required: true  
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: [self-hosted, ancillaries, deploy]
+    env:
+      AWS_ANCILLARIES_ACCESS_KEY_ID_INT: ${{ secrets.AWS_ANCILLARIES_ACCESS_KEY_ID_INT }}
+      AWS_ANCILLARIES_SECRET_ACCESS_KEY_INT: ${{ secrets.AWS_ANCILLARIES_SECRET_ACCESS_KEY_INT }}
+      # TF_LOG: DEBUG
+
+    steps:
+    - name: Checkout terraform config
+      uses: actions/checkout@v2
+
+    - name: Checkout actions
+      uses: actions/checkout@v2
+      with:
+        repository: 'Iberia-Ent/commercial--management--ancillaries--workflows'
+        token: ${{ secrets.GH_PAT_CICD_ANCILLARIES }}
+        ref: 'main'
+        path: '.github/cicd-ancillaries'
+    
+    - name: Set up Node 14
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+    
+    - name: Set up Terraform 1.0.7
+      uses: hashicorp/setup-terraform@v1.2.1
+      with:
+        terraform_wrapper: false
+            
+    - name: Deploy with Terraform
+      uses: ./.github/cicd-ancillaries/github_actions/cd/int/deploy/deploy_terraform
+
+    - name: Health Check
+      uses: ./.github/cicd-ancillaries/github_actions/cd/int/deploy/health_check
+
+  integration_tests:
+    name: Integration Tests
+    needs: [deploy]
+    runs-on: [self-hosted, ancillaries, int]
+
+    steps:
+    - name: Checkout actions
+      uses: actions/checkout@v2
+      with:
+        repository: 'Iberia-Ent/commercial--management--ancillaries--workflows'
+        token: ${{ secrets.GH_PAT_CICD_ANCILLARIES }}
+        ref: '1.0'
+        path: '.github/cicd-ancillaries'
+    
+    - name: Checkout tests
+      uses: actions/checkout@v2
+      with:
+        repository: 'Iberia-Ent/commercial--management--ancillaries--anc-ins--tests'
+        token: ${{ secrets.GH_PAT_CICD_ANCILLARIES }}
+        ref: 'main'
+        path: '.github/integration-tests'
+    
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'temurin'
+        java-version: '11'
+    
+    - name: Testing
+      uses: ./.github/cicd-ancillaries/github_actions/cd/int/deploy/integration_tests
