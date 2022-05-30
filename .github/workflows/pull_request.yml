@@ -9,6 +9,40 @@ jobs:
     runs-on: [self-hosted, ancillaries]
     name: Scan
     steps:
-      - name: Building Artifact
-      - name: Scan
-    
+        # clear source
+        - name: clear
+          run: sudo rm -rf *
+        # checkout source code in runner 
+        - name: Checkout source
+          uses: actions/checkout@v2.4.2
+        # checkout source workflow action base in runner   
+        - name: Checkout actions
+          uses: actions/checkout@v2.4.2
+          with:
+            repository: 'Iberia-Ent/software-engineering--reference-architecture--workflow'
+            token: ${{ secrets.TOKEN_REP }}
+            ref: 'main'
+            path: '.github/cicd'
+        # Configure step build process    
+        - name: build
+          id: output-build
+          uses: ./.github/cicd/github_actions/build
+          with:
+              project-name: ${{ env.PROJECT }}
+              lenguage-code: ${{ env.LENGUAGE }}
+              aws-access-key: ${{secrets.AWS_ACCESS_KEY}} 
+              aws-secret-acesss-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+              codeartifact-allow: true
+              repository-user: ${{secrets.CODEARTIFACT_OWNER}}                
+        # Configure step scan code process
+        - name: scan
+          uses: ./.github/cicd/github_actions/scan
+          with:
+              project-name: ${{ env.PROJECT }}
+              lenguage-code: ${{ env.LENGUAGE }}
+              service-name: ${{ steps.output-build.outputs.package-artifactid-name }}
+              service-version: ${{ steps.output-build.outputs.package-version-name }}
+              group-name: ${{ steps.output-build.outputs.package-groupid-name }}
+              sonarqube-host: ${{ env.SONAR_HOST }}
+              sonarqube-user: ${{ env.SONAR_USER }}
+              sonarqube-token: ${{ env.SONAR_TOKEN }}
