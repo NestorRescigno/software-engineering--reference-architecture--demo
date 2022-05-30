@@ -1,1 +1,43 @@
+name: CI for Main
+
+on:
+  push:  
+    branches: 
+      - main
+
+jobs:
+  build_artifact:
+    name: Build Artifact
+    steps:
+    - name: Checkout source code
+      uses: actions/checkout@v2
+
+    - name: Checkout actions
+      uses: actions/checkout@v2
+      with:
+        repository: 'Iberia-Ent/commercial--management--ancillaries--workflows'
+        token: ${{ secrets.GH_PAT_CICD_ANCILLARIES }}
+        ref: '1.0'
+        path: '.github/cicd-ancillaries'
+
+    - name: Build 
+      uses: ./.github/cicd-ancillaries/github_actions/ci/main/artifact
+  build_ami:
+    name: Build AMI
+    needs: [build_artifact]
+    runs-on: [self-hosted, ancillaries, ami]
+    steps:
+    - name: Checkout source code
+      uses: actions/checkout@v2
+
+    - name: Checkout actions
+      uses: actions/checkout@v2
+      with:
+        repository: 'Iberia-Ent/commercial--management--ancillaries--workflows'
+        token: ${{ secrets.GH_PAT_CICD_ANCILLARIES }}
+        ref: '1.0'
+        path: '.github/cicd-ancillaries'
+  
+    - name: Build AIM
+      uses: ./.github/cicd-ancillaries/github_actions/ci/main/ami
 
