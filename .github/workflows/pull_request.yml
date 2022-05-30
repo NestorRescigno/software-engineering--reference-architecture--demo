@@ -6,6 +6,9 @@ on:
 
 jobs:
   scan:
-    - name: Building Artifact
-    - name: Scan
+    runs-on: [self-hosted, ancillaries]
+    name: Scan
+    steps:
+      - name: Building Artifact
+      - name: Scan
     
