@@ -27,7 +27,7 @@ env:
   SCANCODE_ALLOW: false
   SONAR_HOST: "https://sonar.corp.iberia.es"
   SONAR_USER:  ${{ secrets.IBIS_SONAR_REPO_USER }}
-  SONAR_TOKEN:  ${{ secrets.IBIS_SONAR_REPO_PASS }}
+  SONAR_TOKEN:  ${{ secrets.IBIS_SONAR_TOKEN }}
   SONAR_CL_VER: ""
   VULNERABILITY_HOST: ""
   VULNERABILITY_USER: ""
