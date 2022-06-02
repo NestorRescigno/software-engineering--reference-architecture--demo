@@ -86,6 +86,7 @@ jobs:
               sonarqube-user: ${{ env.SONAR_USER }}
               sonarqube-pwd: ${{ env.SONAR_PWD }}
               sonarqube-token: ${{ env.SONAR_TOKEN }}
+              ref-brach-code: ${{GITHUB_HEAD_REF#refs/heads/}}
         #      sonarqube-client-version: ${{ env.SONAR_CL_VER }}
         #      vulnerability-host: ${{ env.VULNERABILITY_HOST }}
         #      vulnerability-user: ${{ env.VULNERABILITY_USER }}
