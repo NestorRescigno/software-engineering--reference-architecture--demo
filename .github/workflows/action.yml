@@ -40,9 +40,11 @@ jobs:
     steps:
         # clear source
         - name: Permission
+          id: output-permission
           run: |
             echo $USER
             sudo chown -R $USER:$USER $GITHUB_WORKSPACE
+            echo "##[set-output name=branch;]$(echo ${GITHUB_HEAD_REF#refs/heads/})"
         # checkout source code in runner 
         - name: Checkout source
           uses: actions/checkout@v2.4.2
@@ -85,7 +87,7 @@ jobs:
               sonarqube-user: ${{ env.SONAR_USER }}
               sonarqube-pwd: ${{ env.SONAR_PWD }}
               sonarqube-token: ${{ env.SONAR_TOKEN }}
-              ref-brach-code: ${{GITHUB_HEAD_REF#refs/heads/}}
+              ref-brach-code: ${{ steps.output-permission.outputs.branch }}
         #      sonarqube-client-version: ${{ env.SONAR_CL_VER }}
         #      vulnerability-host: ${{ env.VULNERABILITY_HOST }}
         #      vulnerability-user: ${{ env.VULNERABILITY_USER }}
