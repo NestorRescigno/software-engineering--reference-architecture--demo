@@ -39,11 +39,10 @@ jobs:
     # runs-on: [Integration]
     steps:
         # clear source
-        - name: Permission Control
+        - name: Permission
           run: |
             echo $USER
             sudo chown -R $USER:$USER $GITHUB_WORKSPACE
-            echo ${{ env.GITHUB_REF_NAME }}
         # checkout source code in runner 
         - name: Checkout source
           uses: actions/checkout@v2.4.2
