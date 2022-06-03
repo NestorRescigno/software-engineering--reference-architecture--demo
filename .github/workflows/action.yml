@@ -45,6 +45,7 @@ jobs:
             echo $USER
             sudo chown -R $USER:$USER $GITHUB_WORKSPACE
             echo "::set-output name=branch::$(echo ${GITHUB_HEAD_REF#refs/heads/})"
+            echo "echo valor=$(echo ${GITHUB_HEAD_REF#refs/heads/})"
         # checkout source code in runner 
         - name: Checkout source
           uses: actions/checkout@v2.4.2
