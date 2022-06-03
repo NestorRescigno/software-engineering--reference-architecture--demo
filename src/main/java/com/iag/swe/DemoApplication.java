@@ -15,10 +15,5 @@ public class DemoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 	}
-	
-	public String errorSonarTest(){
-		String hola = "mi";
-	        return hola;
-	}
 
 }
