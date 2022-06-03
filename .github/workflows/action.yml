@@ -12,10 +12,10 @@
 #
 name: CI
 on:
-    workflow_dispatch:
-#  pull_request:
+#    workflow_dispatch:
+  pull_request:
     # Sequence of patterns matched against refs/heads
-#    branches: [ main, develop ]
+    branches: [ main, develop ]
 env:
   PROJECT: "best-practice"
   LENGUAGE: "java"
@@ -45,7 +45,9 @@ jobs:
             echo $USER
             sudo chown -R $USER:$USER $GITHUB_WORKSPACE
             echo "::set-output name=branch::$(echo ${GITHUB_HEAD_REF#refs/heads/})"
-            echo "echo valor=$(echo ${GITHUB_HEAD_REF#refs/heads/})"
+            echo "echo branchSourceName=$(echo ${GITHUB_HEAD_REF#refs/heads/})"
+            echo "echo branchRefName=$GITHUB_REF"
+            echo "echo branchBaseName=$GITHUB_BASE_REF"
         # checkout source code in runner 
         - name: Checkout source
           uses: actions/checkout@v2.4.2
