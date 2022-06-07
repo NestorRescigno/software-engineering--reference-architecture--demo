@@ -17,7 +17,7 @@ public class DemoControllerTest {
 	@Test
 	void helloTest() {
 		DemoController demoTest = new DemoController();
-		 assertTrue(demoTest.equals("hello world!!!"),"the unit test dummy is running and ok ;)");
+		 assertTrue(!demoTest.equals("hello world!!!"),"the unit test dummy is running and ok ;)");
 	}
 
 
