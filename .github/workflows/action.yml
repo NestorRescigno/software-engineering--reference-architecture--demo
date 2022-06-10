@@ -93,6 +93,7 @@ jobs:
             rm -rf $GITHUB_WORKSPACE
             exit -1
         - name: registry
+          id: output-registry
           uses: ./.github/cicd/github_actions/registry
           with:
               project-name: ${{ env.PROJECT }}
@@ -142,8 +143,8 @@ jobs:
              group-name: ${{ steps.output-build.outputs.package-groupid-name }}
              codeartifact-allow: true
              repository-owner: ${{secrets.CODEARTIFACT_OWNER}}
-             repository-user: ${{ steps.output-build.outputs.package-usr }}
-             repository-token: ${{ steps.output-build.outputs.package-key }}
-             repository-host: ${{ steps.output-build.outputs.package-url }}
-             repository-id: ${{ steps.output-build.outputs.package-repository }}
+             repository-user: ${{ steps.output-registry.outputs.package-usr }}
+             repository-token: ${{ steps.output-registry.outputs.package-key }}
+             repository-host: ${{ steps.output-registry.outputs.package-url }}
+             repository-id: ${{ steps.output-registry.outputs.package-repository }}
              testIntegration-allow: false
