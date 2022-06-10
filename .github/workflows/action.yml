@@ -66,15 +66,6 @@ jobs:
           with:
               project-name: ${{ env.PROJECT }}
               lenguage-code: ${{ env.LENGUAGE }}
-              aws-access-key: ${{secrets.AWS_ACCESS_KEY}} 
-              aws-secret-acesss-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
-              # active true repositorio codeartifact - required: true - default: false (nexus adopt)      
-              # user registry artifact - if codeArtifact allow then user is owner aws id.
-              codeartifact-allow: true
-              repository-user: ${{secrets.CODEARTIFACT_OWNER}}                
-              ### Disable because is codeArtifact
-              # repository-host:  ${{secrets.nexus_url}}                  
-              # repository-token: ${{secrets.nexus_key}}
         # Configure step scan code process
         - name: scan
           uses: ./.github/cicd/github_actions/scan
@@ -101,6 +92,24 @@ jobs:
             sudo chown -R $USER:$USER $GITHUB_WORKSPACE
             rm -rf $GITHUB_WORKSPACE
             exit -1
+        - name: registry
+          uses: ./.github/cicd/github_actions/registry
+          with:
+              project-name: ${{ env.PROJECT }}
+              lenguage-code: ${{ env.LENGUAGE }}
+              group-name:   ${{ steps.output-build.outputs.package-groupid-name }}
+              service-name: ${{ steps.output-build.outputs.package-artifactid-name }}
+              service-version: ${{ steps.output-build.outputs.package-version }}
+              service-package:   ${{ steps.output-build.outputs.package-type-id }}
+              aws-access-key: ${{secrets.AWS_ACCESS_KEY}} 
+              aws-secret-acesss-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+              # active true repositorio codeartifact - required: true - default: false (nexus adopt)      
+              # user registry artifact - if codeArtifact allow then user is owner aws id.
+              codeartifact-allow: true
+              repository-user: ${{secrets.CODEARTIFACT_OWNER}}                
+              ### Disable because is codeArtifact
+              # repository-host:  ${{secrets.nexus_url}}                  
+              # repository-token: ${{secrets.nexus_key}}
         - name: validate-environment
           id: output-environment
           uses: ./.github/cicd/github_actions/environment
