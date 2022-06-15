@@ -87,11 +87,11 @@ jobs:
         #      vulnerability-user: ${{ env.VULNERABILITY_USER }}
         #      vulnerability-token: ${{ env.VULNERABILITY_TOKEN }}
         # configure environment build process.
-        - name: cleanAndStopForTest
-          run: |
-            sudo chown -R $USER:$USER $GITHUB_WORKSPACE
-            rm -rf $GITHUB_WORKSPACE
-            exit -1
+        #- name: cleanAndStopForTest
+        #  run: |
+        #    sudo chown -R $USER:$USER $GITHUB_WORKSPACE
+        #    rm -rf $GITHUB_WORKSPACE
+        #     exit -1
         - name: registry
           id: output-registry
           uses: ./.github/cicd/github_actions/registry
